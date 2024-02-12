@@ -2,7 +2,7 @@
 
 export GIT_REPOSITORY_URL="$GIT_REPOSITORY_URL"
 
-git clone --depth 1 "$GIT_REPOSITORY_URL" ./home/app/output
+git clone --depth 1 "$GIT_REPOSITORY_URL" /home/app/output
 
 cd ./home/app/output
 
@@ -22,6 +22,6 @@ echo "Build Process completed <0_0>"
 
 ## going back from dist > output > build_server
 pwd
-cd ../../.. # while using docker maybe we have to use ~ for root only
+cd ../ # while using docker maybe we have to use ~ for root only
 pwd
 exec node script.js

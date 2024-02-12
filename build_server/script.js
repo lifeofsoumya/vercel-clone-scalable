@@ -13,15 +13,19 @@ const s3Client = new S3Client({
   },
 });
 
+const project_id = process.env.PROJECT_ID || 'demo-project'
+
 async function init() {
+  const distDirPath = path.join(__dirname, "output", "dist"); // for docker do /output/dist but for now /home/app/output/dist
   const distDirComponents = fs.readdirSync(
-    path.join(__dirname, "home", "app", "output", "dist"), // for docker do /output/dist but for now /home/app/output/dist
+    distDirPath,
     { recursive: true }
   );
 
   console.log("distDirComponents", distDirComponents);
 
-  for (const filePath of distDirComponents) {
+  for (const file of distDirComponents) {
+    const filePath = path.join(distDirPath, file)
     if (fs.lstatSync(filePath).isDirectory()) continue;
 
     console.log('Starting the uploading process for ', filePath)
