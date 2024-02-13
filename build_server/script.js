@@ -28,11 +28,11 @@ async function init() {
     const filePath = path.join(distDirPath, file)
     if (fs.lstatSync(filePath).isDirectory()) continue;
 
-    console.log('Starting the uploading process for ', filePath)
+    console.log('Starting the uploading process for ', filePath, " And file is ", file)
 
     const command = new PutObjectCommand({
       Bucket: "ocode",
-      Key: `__outputs/${project_id}/${filePath}`,
+      Key: `__outputs/${project_id}/${file}`,
       Body: fs.createReadStream(filePath),
       ContentType: mime.lookup(filePath),
     });
